@@ -47,8 +47,7 @@
         </LocationMatch>
 
         #
-        # Useful in case you need to roll back from ssl-only, otherwise
-        # repeat visitors to the site won't be able to access non-SSL.
+        # Make it possible to easily roll back from ssl-only.
         #
         <IfModule headers_module>
                 Header always set Strict-Transport-Security "max-age=0"
