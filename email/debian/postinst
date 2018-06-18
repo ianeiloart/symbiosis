@@ -129,6 +129,33 @@ elif [ -e ${conf}~ ] && ( ! grep -q '/etc/dovecot/symbiosis.d/' ${conf}~ ) ; the
 fi
 
 
+# When moving to Stretch:
+# "sieve.d" (directory) should now be "sieve".
+# "sieve" (symlink) should now be ".dovecot.sieve".
+for d in /srv/*/; do
+  domain="${d%/}"
+  [ -h "$domain" ] && continue
+  [ ! -d "$domain/mailboxes" ] && continue
+
+  for m in "$domain"/mailboxes/*/; do
+    if [ -h "$m/sieve" ]; then
+      # Read the link so we can preserve the chosen active filter.
+      link="`readlink "$m/sieve"`"
+      link_userid="`stat -c '%u' "$m/sieve"`"
+      link_groupid="`stat -c '%g' "$m/sieve"`"
+      link_basename="`basename "$link"`"
+      rm -f "$m/sieve"
+      ln -s "sieve/$link_basename" "$m/.dovecot.sieve"
+      chown -h $link_userid:$link_groupid "$m/.dovecot.sieve"
+    fi
+
+    if [ -d "$m/sieve.d" ] && [ ! -e "$m/sieve" ]; then
+      mv "$m/sieve.d" "$m/sieve"
+    fi
+  done
+done
+
+
 #
 #  Rebuild dovecot
 #
