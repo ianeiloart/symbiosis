@@ -1,3 +1,9 @@
+symbiosis-email (2019:0619) stable; urgency=medium
+
+  * Handle change of sieve directory and symlink locations in postinst.
+
+ -- Jamie Nguyen <j@jamielinux.com>  Tue, 19 Jun 2018 11:18:02 +0100
+
 symbiosis-email (2017:0907) stable; urgency=medium
 
   * Remove duplicate cron job encrypting passwords.
