@@ -1,8 +1,9 @@
-symbiosis-httpd (2018:0618) stable; urgency=medium
+symbiosis-httpd (2018:0619) stable; urgency=medium
 
   * Pass HSTS max-age=0 in vhost SSL template when not using ssl-only,
     which allows easier rollback in case of problems with the SSL site.
-    Fixes GitHub issue #66.
+    Also set max-age=0 in the mass hosting SSL template to allow easy
+    rollback to that. Fixes GitHub issue #66.
 
  -- Jamie Nguyen <j@jamielinux.com>  Mon, 18 Jun 2018 17:21:39 +0100
 
