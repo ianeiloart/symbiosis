@@ -76,17 +76,15 @@
                 SSLStaplingResponderTimeout 5
                 SSLStaplingReturnResponderErrors off
 
-% if mandatory_ssl?
                 <IfModule headers_module>
+% if mandatory_ssl?
                         # HSTS (mod_headers is required) (15768000 seconds = 6 months)
                         Header always set Strict-Transport-Security "max-age=15768000"
-                </IfModule>
 % else
-                <IfModule headers_module>
                         # Make it possible to easily roll back from ssl-only.
                         Header always set Strict-Transport-Security "max-age=0"
-                </IfModule>
 % end
+                </IfModule>
         </IfModule>
 
         #
