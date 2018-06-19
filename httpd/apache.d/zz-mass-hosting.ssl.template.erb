@@ -46,9 +46,9 @@
                 SSLStaplingReturnResponderErrors off
 
                 #
-                # No HSTS here, as we can't check if this domain is supposed to
-                # have enforced HTTPS or not.
+                # Allow easy roll back from ssl-only to mass-hosted SSL.
                 #
+                Header always set Strict-Transport-Security "max-age=0"
         </IfModule>
 
         #
