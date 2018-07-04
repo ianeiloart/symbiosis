@@ -1,3 +1,10 @@
+symbiosis-httpd (2018:0704) stable; urgency=medium
+
+  * Allow Let's Encrypt validation in the presence of basic auth or
+    redirects.
+
+ -- Paul Cammish <paul.cammish@bytemark.co.uk>  Wed, 4 Jul 09:39:01 +0100
+
 symbiosis-httpd (2018:0619) stable; urgency=medium
 
   * Fix symbiosis-httpd.postinst so that no-stats configuration is correctly
