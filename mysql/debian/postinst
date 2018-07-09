@@ -41,4 +41,15 @@ if [ -x /usr/bin/mysql_upgrade ] ; then
   /usr/bin/mysql_upgrade --defaults-file=/etc/mysql/debian.cnf || true
 fi
 
+#
+# Recreate debian-sys-maint user and disable unix_socket auth 
+#
+if ( grep -qx 'password = ' /etc/mysql/debian.cnf ) ; then
+  password=$(tr -dc '[:alnum:]' < /dev/urandom  | dd bs=4 count=4 2> /dev/null)
+  mysql -u root -e "grant all privileges on *.* TO 'debian-sys-maint'@'localhost' identified by '$password' with grant option;"
+  mysql -u root -e "update mysql.user set plugin= '' where user= 'root'; flush privileges;"
+  sed -i "s|user     = root|user     = debian-sys-maint|" /etc/mysql/debian.cnf
+  sed -i "s|password =|password = $password|" /etc/mysql/debian.cnf
+fi
+
 exit 0
