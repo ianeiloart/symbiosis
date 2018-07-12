@@ -1,3 +1,10 @@
+symbiosis-mysql (2018:0712) stable; urgency=medium
+
+  * Add an 'admin'@'localhost' MySQL user with standard username/password
+    authentication for phpmyadmin.
+
+ -- Andrew Ladlow <andrew.ladlow@bytemark.co.uk>  Thu, 12 Jul 2018 14:15:32 +0100
+
 symbiosis-mysql (2017:0905) stable; urgency=medium
 
   * Explcitly depend on the stretch version of default-mysql-server to pull
